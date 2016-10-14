@@ -87,3 +87,8 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+env
+*.DS_Store
+*.pyc
+__pycache__
