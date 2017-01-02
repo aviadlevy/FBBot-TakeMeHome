@@ -34,6 +34,7 @@ class takeMeHomeView(generic.View):
             for message in entry['messaging']:
                 fbid = message['sender']['id']
                 user_data = get_user_details_from_facebook(fbid)
+                pprint(user_data)
                 if 'message' in message:
                     # Print the message to the terminal
                     pprint(message)
@@ -99,8 +100,8 @@ def handle_request(message, fbid, user_name):
         lat, long = message['attachments'][0]['payload']['coordinates'].get('lat'), message['attachments'][0][
             'payload']['coordinates'].get('long')
         from geopy.geocoders import Nominatim
-        location = Nominatim().reverse(str(lat) + "," + str(long), language=lang)
         try:
+            location = Nominatim().reverse(str(lat) + "," + str(long), language=lang)
             res = location.raw["address"]["pedestrian"] + " " + location.raw["address"]["city"] + "\n"
         except Exception as e:
             print repr(e)
